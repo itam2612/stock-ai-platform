@@ -1,0 +1,12 @@
+pandas
+numpy
+openpyxl
+ta
+yfinance
+matplotlib
+plotly
+scikit-learn
+optuna
+joblib
+requests
+tqdm
