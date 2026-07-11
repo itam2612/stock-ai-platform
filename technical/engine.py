@@ -1,24 +1,20 @@
-from tqdm import tqdm
-
-from technical.indicators import IndicatorCalculator
+from technical.registry import IndicatorRegistry
 
 
-class IndicatorEngine:
+class TechnicalEngine:
 
-    def calculate(self, stocks):
+    def __init__(self):
 
-        result = {}
+        self.registry = IndicatorRegistry()
 
-        print("Indicator計算開始")
+    def add_indicator(self, indicator):
 
-        for code in tqdm(stocks):
+        self.registry.register(indicator)
 
-            df = stocks[code]
+    def calculate(self, df):
 
-            df = IndicatorCalculator.add_all(df)
+        for indicator in self.registry.get_all():
 
-            result[code] = df
+            df = indicator.calculate(df)
 
-        print("Indicator計算終了")
-
-        return result
+        return df
